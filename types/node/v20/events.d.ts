@@ -32,8 +32,11 @@
  * });
  * myEmitter.emit('event');
  * ```
- * @see [source](https://github.com/nodejs/node/blob/v20.13.1/lib/events.js)
+ * @see [source](https://github.com/nodejs/node/blob/v22.x/lib/events.js)
  */
+
+declare const brandSymbol: unique symbol;
+
 declare module "events" {
     import { AsyncResource, AsyncResourceOptions } from "node:async_hooks";
     // NOTE: This class is in the docs but is **not actually exported** by Node.
@@ -120,6 +123,7 @@ declare module "events" {
         : (EventName extends keyof EventEmitter.EventEmitterBuiltInEventMap
             ? (...args: EventEmitter.EventEmitterBuiltInEventMap[EventName]) => void
             : (...args: any[]) => void);
+
     /**
      * The `EventEmitter` class is defined and exposed by the `node:events` module:
      *
@@ -134,6 +138,10 @@ declare module "events" {
      * @since v0.1.26
      */
     class EventEmitter<Events extends EventMap<Events> = {}> {
+        // This "property" is used to brand a specific instance of the EventEmitter class with its Event map, which is needed
+        // in order to infer the map if we have a chain like `class A extends EventEmitter<{}>` (or many levels deep)
+        readonly [brandSymbol]: Events;
+
         constructor(options?: EventEmitterOptions);
 
         [EventEmitter.captureRejectionSymbol]?<EventName extends EventNames<Events>>(
@@ -640,6 +648,8 @@ declare module "events" {
     global {
         namespace NodeJS {
             interface EventEmitter<Events extends EventMap<Events> = {}> {
+                readonly [brandSymbol]: Events;
+
                 [EventEmitter.captureRejectionSymbol]?<EventName extends EventNames<Events>>(
                     error: Error,
                     event: EventName,
