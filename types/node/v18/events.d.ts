@@ -391,7 +391,7 @@ declare module "events" {
          * the max set, the EventTarget will print a warning.
          *
          * ```js
-         * import { getMaxListeners, setMaxListeners, EventEmitter } from 'node:events';
+         * const { getMaxListeners, setMaxListeners, EventEmitter } = require('events');
          *
          * {
          *   const ee = new EventEmitter();
@@ -443,7 +443,7 @@ declare module "events" {
          * Returns a disposable so that it may be unsubscribed from more easily.
          *
          * ```js
-         * import { addAbortListener } from 'node:events';
+         * const { addAbortListener } = require('events');
          *
          * function example(signal) {
          *   let disposable;
@@ -505,7 +505,7 @@ declare module "events" {
          * temporarily avoid this warning:
          *
          * ```js
-         * import { EventEmitter } from 'node:events';
+         * const EventEmitter = require('events');
          * const emitter = new EventEmitter();
          * emitter.setMaxListeners(emitter.getMaxListeners() + 1);
          * emitter.once('event', () => {
@@ -668,7 +668,7 @@ declare module "events" {
                  * event listener to the beginning of the listeners array.
                  *
                  * ```js
-                 * import { EventEmitter } from 'node:events';
+                 * const EventEmitter = require('events');
                  * const myEE = new EventEmitter();
                  * myEE.on('foo', () => console.log('a'));
                  * myEE.prependListener('foo', () => console.log('b'));
@@ -705,7 +705,7 @@ declare module "events" {
                  * event listener to the beginning of the listeners array.
                  *
                  * ```js
-                 * import { EventEmitter } from 'node:events';
+                 * const EventEmitter = require('events');
                  * const myEE = new EventEmitter();
                  * myEE.once('foo', () => console.log('a'));
                  * myEE.prependOnceListener('foo', () => console.log('b'));
