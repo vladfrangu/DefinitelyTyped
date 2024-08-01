@@ -357,7 +357,7 @@ declare module "events" {
          * event target. This is useful for debugging and diagnostic purposes.
          *
          * ```js
-         * import { getEventListeners, EventEmitter } from 'node:events';
+         * const { getEventListeners, EventEmitter } = require('events');
          *
          * {
          *   const ee = new EventEmitter();
@@ -555,9 +555,9 @@ declare module "events" {
          * of `events.EventEmitterAsyncResource` will run within its `async context`.
          *
          * ```js
-         * import { EventEmitterAsyncResource, EventEmitter } from 'node:events';
-         * import { notStrictEqual, strictEqual } from 'node:assert';
-         * import { executionAsyncId, triggerAsyncId } from 'node:async_hooks';
+         * const { EventEmitterAsyncResource, EventEmitter } = require('events');
+         * const { notStrictEqual, strictEqual } = require('assert');
+         * const { executionAsyncId, triggerAsyncId } = require('async_hooks');
          *
          * // Async tracking tooling will identify this as 'Q'.
          * const ee1 = new EventEmitterAsyncResource({ name: 'Q' });
@@ -744,7 +744,7 @@ declare module "events" {
                  * will not remove them from`emit()` in progress. Subsequent events behave as expected.
                  *
                  * ```js
-                 * import { EventEmitter } from 'node:events';
+                 * const EventEmitter = require('events');
                  * class MyEmitter extends EventEmitter {}
                  * const myEmitter = new MyEmitter();
                  *
@@ -786,7 +786,7 @@ declare module "events" {
                  * recently added instance. In the example the `once('ping')` listener is removed:
                  *
                  * ```js
-                 * import { EventEmitter } from 'node:events';
+                 * const EventEmitter = require('events');
                  * const ee = new EventEmitter();
                  *
                  * function pong() {
