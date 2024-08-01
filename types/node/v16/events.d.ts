@@ -522,7 +522,8 @@ declare module "events" {
     }
     global {
         namespace NodeJS {
-            interface EventEmitter<Events extends EventMap<Events> = {}> { // This "property" is used to brand a specific instance of the EventEmitter class with its Event map, which is needed
+            interface EventEmitter<Events extends EventMap<Events> = {}> {
+                // This "property" is used to brand a specific instance of the EventEmitter class with its Event map, which is needed
                 // in order to infer the map if we have a chain like `class A extends EventEmitter<{}>` (or many levels deep)
                 // It is also marked as possibly undefined in order to allow something like `const t: NodeJS.EventEmitter<{}> = { <insert implementation here> };`
                 readonly [brandSymbol]?: Events;
