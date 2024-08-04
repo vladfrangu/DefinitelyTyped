@@ -281,21 +281,21 @@ declare const event5: "event5";
 }
 
 {
-    class Extended extends events.EventEmitter<{ wow: [string, boolean] }> {}
+    class Extended extends events.EventEmitter<T> {}
 
     class DoubleExtension extends Extended {}
 
     const extended = new Extended();
     const doubleExtended = new DoubleExtension();
 
-    events.on(extended, "wow"); // $ExpectType AsyncIterableIterator<[string, boolean]>
-    events.once(extended, "wow"); // $ExpectType Promise<[string, boolean]>
+    events.on(extended, "event1"); // $ExpectType AsyncIterableIterator<[string, number]>
+    events.once(extended, "event1"); // $ExpectType Promise<[string, number]>
 
     events.on(extended, "unknown"); // $ExpectType AsyncIterableIterator<any[]>
     events.once(extended, "unknown"); // $ExpectType Promise<any[]>
 
-    events.on(doubleExtended, "wow"); // $ExpectType AsyncIterableIterator<[string, boolean]>
-    events.once(doubleExtended, "wow"); // $ExpectType Promise<[string, boolean]>
+    events.on(doubleExtended, "event1"); // $ExpectType AsyncIterableIterator<[string, number]>
+    events.once(doubleExtended, "event1"); // $ExpectType Promise<[string, number]>
 
     events.on(doubleExtended, "unknown"); // $ExpectType AsyncIterableIterator<any[]>
     events.once(doubleExtended, "unknown"); // $ExpectType Promise<any[]>

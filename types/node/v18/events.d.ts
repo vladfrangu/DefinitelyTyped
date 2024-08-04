@@ -1,3 +1,5 @@
+declare const internalTypeOnlyBrandSymbol: unique symbol;
+
 /**
  * Much of the Node.js core API is built around an idiomatic asynchronous
  * event-driven architecture in which certain kinds of objects (called "emitters")
@@ -34,8 +36,6 @@
  * ```
  * @see [source](https://github.com/nodejs/node/blob/v18.0.0/lib/events.js)
  */
-
-declare const brandSymbol: unique symbol;
 
 declare module "events" {
     import { AsyncResource, AsyncResourceOptions } from "node:async_hooks";
@@ -621,7 +621,7 @@ declare module "events" {
                 // This "property" is used to brand a specific instance of the EventEmitter class with its Event map, which is needed
                 // in order to infer the map if we have a chain like `class A extends EventEmitter<{}>` (or many levels deep)
                 // It is also marked as possibly undefined in order to allow something like `const t: NodeJS.EventEmitter<{}> = { <insert implementation here> };`
-                readonly [brandSymbol]?: Events;
+                readonly [internalTypeOnlyBrandSymbol]?: Events;
 
                 [EventEmitter.captureRejectionSymbol]?<EventName extends EventNames<Events>>(
                     error: Error,
